@@ -1,6 +1,7 @@
 /node_modules/**
 /.sass-cache/**
 /.idea
+/static-resources/**
 **/target
 *.iml
 *.class
