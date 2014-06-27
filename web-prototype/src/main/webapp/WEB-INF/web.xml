@@ -6,8 +6,30 @@
 
     <display-name>7bits java prototype</display-name>
 
+    <!-- if you don't want to use java config then you should uncomment following block accentuated by tags '' ''-->
+    <!-- start -->
 
+    <!--&lt;!&ndash; Context parameters &ndash;&gt;-->
+    <!--<context-param>-->
+        <!--<param-name>contextConfigLocation</param-name>-->
+        <!--<param-value>-->
+            <!--/WEB-INF/configs/applicationContext*.xml-->
+        <!--</param-value>-->
+    <!--</context-param>-->
 
+    <!--&lt;!&ndash; Main servlet &ndash;&gt;-->
+    <!--<servlet>-->
+        <!--<servlet-name>application</servlet-name>-->
+        <!--<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>-->
+        <!--<load-on-startup>1</load-on-startup>-->
+    <!--</servlet>-->
+
+    <!--<servlet-mapping>-->
+        <!--<servlet-name>application</servlet-name>-->
+        <!--<url-pattern>/</url-pattern>-->
+    <!--</servlet-mapping>-->
+
+    <!-- end -->
 
     <!-- Mapping for error codes -->
 
