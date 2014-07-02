@@ -15,9 +15,19 @@
 
     <properties>
         <spring.version>3.2.4.RELEASE</spring.version>
+        <spring-security.version>3.2.0.RELEASE</spring-security.version>
+        <org.slf4j.version>1.7.5</org.slf4j.version>
     </properties>
 
     <dependencies>
+
+        <!-- it.sevenbits.modules-->
+
+        <dependency>
+            <groupId>it.sevenbits.modules</groupId>
+            <artifactId>common-validator</artifactId>
+            <version>1.0</version>
+        </dependency>
 
         <!--  Router  -->
 
@@ -46,6 +56,98 @@
             <artifactId>spring-webmvc</artifactId>
             <version>${spring.version}</version>
         </dependency>
+
+        <!-- Spring Security-->
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-core</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring-security.version}</version>
+        </dependency>
+
+        <!-- javax.servlet -->
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>javax.servlet-api</artifactId>
+            <version>3.1.0</version>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Logging -->
+
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+            <version>${org.slf4j.version}</version>
+        </dependency>
+
+        <!-- Jackson JSON Mapper -->
+
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-mapper-asl</artifactId>
+            <version>1.9.13</version>
+        </dependency>
+
+        <!-- Jackson JSON Mapper -->
+
+        <dependency>
+            <groupId>org.codehaus.jackson</groupId>
+            <artifactId>jackson-core-asl</artifactId>
+            <version>1.9.13</version>
+        </dependency>
+
+        <!-- commons-codec -->
+        <!-- TODO: Used for StringUtils.isBlank in UrlUtils. Need remove if possible -->
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.0</version>
+        </dependency>
+
+        <!-- Jade -->
+
+        <dependency>
+            <groupId>de.neuland-bfi</groupId>
+            <artifactId>spring-jade4j</artifactId>
+            <version>0.4.0</version>
+        </dependency>
+
+        <!-- JSP -->
+
+        <dependency>
+            <groupId>javax.servlet</groupId>
+            <artifactId>jstl</artifactId>
+            <version>1.2</version>
+        </dependency>
+
+        <!--&lt;!&ndash; For freemaker &ndash;&gt;-->
+
+        <!--<dependency>-->
+            <!--<groupId>org.freemarker</groupId>-->
+            <!--<artifactId>freemarker</artifactId>-->
+            <!--<version>2.3.20</version>-->
+        <!--</dependency>-->
+
+        <!--<dependency>-->
+            <!--<groupId>org.springframework</groupId>-->
+            <!--<artifactId>spring-context-support</artifactId>-->
+            <!--<version>${spring.version}</version>-->
+        <!--</dependency>-->
 
     </dependencies>
 

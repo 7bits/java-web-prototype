@@ -1,9 +1,8 @@
 package it.sevenbits.project.application.configs;
 
 import org.resthub.web.springmvc.router.RouterConfigurationSupport;
-import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.PropertySource;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,10 +13,14 @@ import java.util.List;
 @Configuration
 public class RouterConfig extends RouterConfigurationSupport {
 
+    @Value("#{systemProperties['project.config']}")
+    private String propertyConfig;
+
     @Override
     public List<String> listRouteFiles() {
         List<String> listRouteFiles = new ArrayList<>();
-        listRouteFiles.add("file:${application.config}/project/routes/application/routes.conf");
+        // TODO need research: doesn't work ${project.config} in next string. Reason - unknown
+        listRouteFiles.add("file:" + propertyConfig + "/routes/application/routes.conf");
 
         return listRouteFiles;
     }

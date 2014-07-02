@@ -1,0 +1,17 @@
+//extends layouts/admin-layout
+
+block append head
+  title=fmt.message("login.title", locale)
+block append content
+  //include includes/menu
+  .login-background
+    .login-bg1.login-bg-img
+    .login-bg2.login-bg-img
+    .login-bg3.login-bg-img
+    .login-bg4.login-bg-img
+    .container.login-container.js-page-container
+      .login-form-wrap
+        .login-descr
+          #{fmt.message("login.welcome", locale)}
+          br
+          #{fmt.message("login.please-register", locale)}

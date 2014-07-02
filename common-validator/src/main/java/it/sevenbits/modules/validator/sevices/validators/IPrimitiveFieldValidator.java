@@ -1,6 +1,4 @@
-package it.sevenbits.project.application.services.validator;
-
-import org.springframework.web.multipart.MultipartFile;
+package it.sevenbits.modules.validator.sevices.validators;
 
 import java.util.Map;
 
@@ -92,13 +90,4 @@ public interface IPrimitiveFieldValidator {
      * @param key          Rejected message key
      */
     void rejectValue(Map<String, String> errors, String field, String key);
-
-    /**
-     * Validate whether file is not null, otherwise reject it
-     * @param file      File
-     * @param errors    Map for errors
-     * @param field     Rejected field name
-     * @param key       Rejected message key
-     */
-    void isNotNull(MultipartFile file, Map<String, String> errors, String field, String key);
 }

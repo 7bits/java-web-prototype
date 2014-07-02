@@ -6,8 +6,8 @@
     <packaging>pom</packaging>
     <version>1.0</version>
     <modules>
-        <module>router</module>
         <module>web-prototype</module>
+        <module>common-validator</module>
     </modules>
     <name>modules</name>
 

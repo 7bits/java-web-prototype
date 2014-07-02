@@ -1,14 +1,10 @@
-package it.sevenbits.project.application.services.validator;
-
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
+package it.sevenbits.modules.validator.sevices.validators;
 
 import java.util.Map;
 
 /**
  * Field validator
  */
-@Service
 public class PrimitiveFieldValidator implements IPrimitiveFieldValidator {
 
     /** Pattern for whitespaces */
@@ -224,23 +220,4 @@ public class PrimitiveFieldValidator implements IPrimitiveFieldValidator {
         errors.put(field, key);
     }
 
-    /**
-     * Validate whether file is not null, otherwise reject it
-     *
-     * @param file   File
-     * @param errors Map for errors
-     * @param field  Rejected field name
-     * @param key    Rejected message key
-     */
-    @Override
-    public void isNotNull(
-            final MultipartFile file,
-            final Map<String, String> errors,
-            final String field,
-            final String key
-    ) {
-        if (file.isEmpty() && !errors.containsKey(field)) {
-            errors.put(field, key);
-        }
-    }
 }
