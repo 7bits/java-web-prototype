@@ -1,4 +1,4 @@
-package it.sevenbits.project.application.configs;
+package it.sevenbits.project.application.configs.localization;
 
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;

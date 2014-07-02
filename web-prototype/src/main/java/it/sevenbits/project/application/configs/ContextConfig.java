@@ -1,5 +1,6 @@
 package it.sevenbits.project.application.configs;
 
+import it.sevenbits.project.application.web.filters.LocaleUrlFilter;
 import org.apache.log4j.Logger;
 import org.springframework.core.annotation.Order;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
@@ -37,9 +38,12 @@ public class ContextConfig extends AbstractAnnotationConfigDispatcherServletInit
     @Override
     protected Class<?>[] getRootConfigClasses() {
          return new Class<?>[] {
-//                 SecurityConfig.class,
 //                 MyBatisConfig.class
                  ConfigurationComponentScan.class
+                 /******************************************/
+                 /*   Should be enabled if security need   */
+                 /******************************************/
+                 //SecurityConfig.class
          };
     }
 
@@ -69,7 +73,9 @@ public class ContextConfig extends AbstractAnnotationConfigDispatcherServletInit
      */
     @Override
     protected Filter[] getServletFilters() {
+        LocaleUrlFilter localeUrlFilter = new LocaleUrlFilter();
         return new Filter[]{
+                localeUrlFilter,
                 /**
                  * need if upload file feature will used
                  */

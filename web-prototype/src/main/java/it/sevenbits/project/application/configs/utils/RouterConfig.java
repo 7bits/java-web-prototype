@@ -1,4 +1,4 @@
-package it.sevenbits.project.application.configs;
+package it.sevenbits.project.application.configs.utils;
 
 import org.resthub.web.springmvc.router.RouterConfigurationSupport;
 import org.springframework.beans.factory.annotation.Value;

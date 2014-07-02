@@ -1,4 +1,4 @@
-package it.sevenbits.project.application.configs;
+package it.sevenbits.project.application.configs.resolvers;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

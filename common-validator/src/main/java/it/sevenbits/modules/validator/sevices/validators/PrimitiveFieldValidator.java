@@ -180,7 +180,9 @@ public class PrimitiveFieldValidator implements IPrimitiveFieldValidator {
                 }
             }
         } catch (Exception e) {
+            // TODO change method logic because catch contains 'do nothing' action
             // do nothing
+            e.getMessage();
         }
     }
 

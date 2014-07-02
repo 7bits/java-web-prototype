@@ -1,4 +1,4 @@
-package it.sevenbits.project.application.configs;
+package it.sevenbits.project.application.configs.utils;
 
 import it.sevenbits.modules.validator.sevices.validators.PrimitiveFieldValidator;
 import org.springframework.context.annotation.Bean;

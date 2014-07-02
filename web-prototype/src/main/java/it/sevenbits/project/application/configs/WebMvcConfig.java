@@ -4,7 +4,6 @@ import it.sevenbits.project.application.web.utils.HandlerInterceptor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.HttpMessageConverter;
@@ -25,8 +24,6 @@ import java.util.List;
 @EnableWebMvc
 @EnableAsync
 @EnableScheduling
-@ComponentScan(basePackages = {"it.sevenbits.project.application" }, useDefaultFilters = false,
-        includeFilters = @ComponentScan.Filter(org.springframework.stereotype.Controller.class))
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 
     @Autowired

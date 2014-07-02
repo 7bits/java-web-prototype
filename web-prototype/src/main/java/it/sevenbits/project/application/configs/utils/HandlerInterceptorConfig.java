@@ -1,4 +1,4 @@
-package it.sevenbits.project.application.configs;
+package it.sevenbits.project.application.configs.utils;
 
 import it.sevenbits.project.application.transitions.utils.MessageResolver;
 import it.sevenbits.project.application.web.utils.HandlerInterceptor;

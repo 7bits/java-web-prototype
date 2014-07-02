@@ -1,1 +1,4 @@
-package it.sevenbits.project.application.web;
+/**
+ * Web layer
+ */
+ package it.sevenbits.project.application.web;

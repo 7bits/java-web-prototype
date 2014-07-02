@@ -1,4 +1,4 @@
-package it.sevenbits.project.application.configs;
+package it.sevenbits.project.application.configs.resolvers;
 
 import it.sevenbits.project.application.web.utils.UrlResolver;
 import org.springframework.context.annotation.Bean;
