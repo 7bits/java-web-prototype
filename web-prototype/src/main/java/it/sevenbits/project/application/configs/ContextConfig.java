@@ -3,23 +3,13 @@ package it.sevenbits.project.application.configs;
 import it.sevenbits.project.application.web.filters.LocaleUrlFilter;
 import org.apache.log4j.Logger;
 import org.springframework.core.annotation.Order;
+import org.springframework.security.web.session.HttpSessionEventPublisher;
 import org.springframework.web.filter.HiddenHttpMethodFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
 import javax.servlet.ServletContext;
 import javax.servlet.ServletRegistration;
-
-/*
- * need if spring security will used
- */
-//import org.springframework.security.web.session.HttpSessionEventPublisher;
-
-/**
- * need if upload file feature will used
- */
-//import org.springframework.web.multipart.support.MultipartFilter;
-//import javax.servlet.MultipartConfigElement;
 
 /**
  * Spring Context Config
@@ -38,11 +28,15 @@ public class ContextConfig extends AbstractAnnotationConfigDispatcherServletInit
     @Override
     protected Class<?>[] getRootConfigClasses() {
          return new Class<?>[] {
-//                 MyBatisConfig.class
                  ConfigurationComponentScan.class
-                 /******************************************/
-                 /*   Should be enabled if security need   */
-                 /******************************************/
+                 /********************************************************/
+                 /*   Should be enabled if a data source need configure  */
+                 /********************************************************/
+                 //DataSourceConfig.class,
+
+                 /********************************************************/
+                 /*   Should be enabled if security configuration need   */
+                 /********************************************************/
                  //SecurityConfig.class
          };
     }
@@ -75,11 +69,14 @@ public class ContextConfig extends AbstractAnnotationConfigDispatcherServletInit
     protected Filter[] getServletFilters() {
         LocaleUrlFilter localeUrlFilter = new LocaleUrlFilter();
         return new Filter[]{
+                /*********************************************/
+                /* need if 'locale in url' feature will used */
+                /*********************************************/
                 localeUrlFilter,
-                /**
-                 * need if upload file feature will used
-                 */
-//                new MultipartFilter(),
+                /*******************************************/
+                /* need if 'upload file' feature will used */
+                /*******************************************/
+                //new MultipartFilter(),
                 new HiddenHttpMethodFilter()
         };
     }
@@ -92,8 +89,7 @@ public class ContextConfig extends AbstractAnnotationConfigDispatcherServletInit
     protected void registerDispatcherServlet(final ServletContext servletContext) {
         super.registerDispatcherServlet(servletContext);
 
-        /* need if spring security will used */
-//        servletContext.addListener(new HttpSessionEventPublisher());
+        servletContext.addListener(new HttpSessionEventPublisher());
     }
 
     /**
@@ -104,11 +100,9 @@ public class ContextConfig extends AbstractAnnotationConfigDispatcherServletInit
     @Override
     protected void customizeRegistration(final ServletRegistration.Dynamic registration) {
 
-        /**
-         * need if upload file feature will used
-         */
-//        MultipartConfigElement multipartConfigElement =
-//                new MultipartConfigElement("");
-//        registration.setMultipartConfig(multipartConfigElement);
+        /*******************************************/
+        /* need if 'upload file' feature will used */
+        /*******************************************/
+        //registration.setMultipartConfig(new MultipartConfigElement(""));
     }
 }
