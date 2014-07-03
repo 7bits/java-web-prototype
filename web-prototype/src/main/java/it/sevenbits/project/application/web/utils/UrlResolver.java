@@ -94,7 +94,7 @@ public class UrlResolver {
                 urlPart.append("/");
                 urlPart.append(language);
                 if (!country.isEmpty()) {
-                    urlPart.append("/");
+                    urlPart.append("_");
                     urlPart.append(country);
                 }
             }

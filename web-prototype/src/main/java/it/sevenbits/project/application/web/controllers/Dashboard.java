@@ -35,7 +35,7 @@ public class Dashboard {
             final HttpServletResponse response
     ) throws IOException {
         Locale locale = RequestContextUtils.getLocale(request);
-        ModelAndView mav = new ModelAndView("login.jade");
+        ModelAndView mav = new ModelAndView("index.jade");
 
         return mav;
     }

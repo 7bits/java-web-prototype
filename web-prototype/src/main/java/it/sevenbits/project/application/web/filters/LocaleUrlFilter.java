@@ -20,7 +20,7 @@ import java.util.regex.Pattern;
 public class LocaleUrlFilter implements Filter {
 
     /** Pattern to recognize (1) - language, (2) - country, (3) - rest of url */
-    private static final Pattern LOCALE_PATTERN = Pattern.compile("^/([a-z]{2})(?:/([a-z]{2}))?(/.*)?");
+    private static final Pattern LOCALE_PATTERN = Pattern.compile("^/([a-zA-Z]{2})(?:_([a-zA-Z]{2}))?(/.*)?");
     /** Session attribute used to add country code */
     private static final String COUNTRY_CODE_ATTRIBUTE_NAME = LocaleUrlFilter.class.getName() + ".country";
     /** Session attribute used to add language code */
