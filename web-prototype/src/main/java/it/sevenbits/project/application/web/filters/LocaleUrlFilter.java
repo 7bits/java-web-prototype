@@ -1,13 +1,20 @@
 package it.sevenbits.project.application.web.filters;
 
+import it.sevenbits.project.application.configs.localization.LocaleResolverConfig;
+import org.springframework.web.servlet.i18n.CookieLocaleResolver;
+import org.springframework.web.util.WebUtils;
+
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
 import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -21,10 +28,6 @@ public class LocaleUrlFilter implements Filter {
 
     /** Pattern to recognize (1) - language, (2) - country, (3) - rest of url */
     private static final Pattern LOCALE_PATTERN = Pattern.compile("^/([a-zA-Z]{2})(?:_([a-zA-Z]{2}))?(/.*)?");
-    /** Session attribute used to add country code */
-    private static final String COUNTRY_CODE_ATTRIBUTE_NAME = LocaleUrlFilter.class.getName() + ".country";
-    /** Session attribute used to add language code */
-    private static final String LANGUAGE_CODE_ATTRIBUTE_NAME = LocaleUrlFilter.class.getName() + ".language";
     /** Language group */
     private static final int GROUP_LANGUAGE = 1;
     /** Country group */
@@ -32,7 +35,9 @@ public class LocaleUrlFilter implements Filter {
     /** URI Fragment group */
     private static final int GROUP_FRAGMENT = 3;
 
-
+    /**
+     * Filter destroy method
+     */
     public void destroy() {
     }
 
@@ -49,13 +54,28 @@ public class LocaleUrlFilter implements Filter {
             final FilterChain filterChain
     ) throws IOException, ServletException {
 
-        final HttpServletRequest request = (HttpServletRequest) servletRequest;
-        final String url = request.getRequestURI().substring(request.getContextPath().length());
-        final Matcher matcher = LOCALE_PATTERN.matcher(url);
-
+        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        HttpServletResponse response = (HttpServletResponse) servletResponse;
+        String url = request.getRequestURI().substring(request.getContextPath().length());
+        Matcher matcher = LOCALE_PATTERN.matcher(url);
+        Locale locale = Locale.getDefault();
         if (matcher.matches()) {
-            request.getSession().setAttribute(LANGUAGE_CODE_ATTRIBUTE_NAME, matcher.group(GROUP_LANGUAGE));
-            request.getSession().setAttribute(COUNTRY_CODE_ATTRIBUTE_NAME, matcher.group(GROUP_COUNTRY));
+            String language = matcher.group(GROUP_LANGUAGE);
+            String country = matcher.group(GROUP_COUNTRY);
+            if (country != null && !country.isEmpty()) {
+                locale = new Locale(language.toLowerCase(), country.toLowerCase());
+            } else {
+                locale = new Locale(language.toLowerCase());
+            }
+            request.setAttribute(CookieLocaleResolver.LOCALE_REQUEST_ATTRIBUTE_NAME, locale);
+            Cookie cookie = WebUtils.getCookie(request, LocaleResolverConfig.COOKIE_NAME);
+            if (cookie != null) {
+                cookie.setValue(locale.toString());
+            } else {
+                cookie = new Cookie(LocaleResolverConfig.COOKIE_NAME, locale.toString());
+            }
+            cookie.setPath(request.getContextPath());
+            response.addCookie(cookie);
             String restOfUrl;
             if (matcher.group(GROUP_FRAGMENT) == null) {
                 restOfUrl = "/";
@@ -65,19 +85,47 @@ public class LocaleUrlFilter implements Filter {
             request.getRequestDispatcher(restOfUrl)
                     .forward(servletRequest, servletResponse);
         } else {
-            filterChain.doFilter(servletRequest, servletResponse);
+            Cookie cookie = WebUtils.getCookie(request, LocaleResolverConfig.COOKIE_NAME);
+            if (cookie != null) {
+                locale = parseCookie(cookie, "_");
+            } else {
+                Locale clientLocale = request.getLocale();
+                if (clientLocale != null) {
+                    cookie = new Cookie(LocaleResolverConfig.COOKIE_NAME, clientLocale.toString());
+                } else {
+                    cookie = new Cookie(LocaleResolverConfig.COOKIE_NAME, locale.toString());
+                }
+            }
+            request.setAttribute(CookieLocaleResolver.LOCALE_REQUEST_ATTRIBUTE_NAME, locale);
+            cookie.setPath(request.getContextPath());
+            response.addCookie(cookie);
+            filterChain.doFilter(request, response);
         }
     }
 
+    /**
+     * parse cookie to locale
+     * @param cookie given cookie
+     * @param separator separator symbol for separate language and country
+     * @return locale
+     */
+    private Locale parseCookie(final Cookie cookie, final String separator) {
+        if (cookie != null) {
+            String[] cookieLocaleParts = cookie.getValue().toLowerCase().split(separator);
+            if (cookieLocaleParts.length > 1) {
+                return new Locale(cookieLocaleParts[0], cookieLocaleParts[1]);
+            } else {
+                return new Locale(cookieLocaleParts[0]);
+            }
+        }
+
+        return null;
+    }
+
+    /**
+     * Filter initialise method
+     * @param arg0 incoming argument
+     * @throws ServletException
+     */
     public void init(final FilterConfig arg0) throws ServletException {}
-
-    /** Session attribute used to add country code */
-    public static String getCountryCodeAttributeName() {
-        return COUNTRY_CODE_ATTRIBUTE_NAME;
-    }
-
-    /** Session attribute used to add language code */
-    public static String getLanguageCodeAttributeName() {
-        return LANGUAGE_CODE_ATTRIBUTE_NAME;
-    }
 }
