@@ -8,9 +8,9 @@ import java.io.Serializable;
 /**
  * Base class for persistent objects with ID and Unix timestamp fields
  * for managing created and updated dates of the object
- * @param <E> child class
+ * @param <Entity> child class
  */
-public abstract class AbstractEntity<E extends Serializable> implements ITimestampable, Serializable {
+public abstract class AbstractEntity<Entity extends Serializable> implements ITimestampable, Serializable {
 
     private static final long serialVersionUID = -3920707135660443143L;
 
@@ -45,9 +45,9 @@ public abstract class AbstractEntity<E extends Serializable> implements ITimesta
      * Clones this object with all nested objects fully copied
      * @return copy of this
      */
-    public E deepClone() {
+    public Entity deepClone() {
         try {
-            return SerializationUtils.clone((E) this);
+            return SerializationUtils.clone((Entity) this);
         } catch (SerializationException e) {
             return null;
         }

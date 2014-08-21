@@ -39,6 +39,16 @@ public abstract class AbstractPresenter<Model, View> implements IPresenter<Model
     }
 
     /**
+     * Presents exception
+     * @param exception    Exception
+     * @param locale       Locale
+     * @return View model for exception case
+     */
+    public View exceptionPresent(final Exception exception, final Locale locale) {
+        return null;
+    }
+
+    /**
      * Localizes errors map
      * @param errors    Map with errors <field, key>
      * @param locale    Locale
@@ -53,15 +63,5 @@ public abstract class AbstractPresenter<Model, View> implements IPresenter<Model
         }
 
         return errorsLocalized;
-    }
-
-    /**
-     * Presents exception
-     * @param exception    Exception
-     * @param locale       Locale
-     * @return View model for exception case
-     */
-    public View exceptionPresent(final Exception exception, final Locale locale) {
-        return null;
     }
 }

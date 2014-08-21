@@ -2,6 +2,7 @@ package it.sevenbits.project.application.transition.executor;
 
 import it.sevenbits.project.application.model.AbstractEntity;
 import it.sevenbits.project.application.service.exception.ServiceException;
+import it.sevenbits.project.application.transition.form.AbstractForm;
 import it.sevenbits.project.application.transition.presenter.IPresenter;
 import it.sevenbits.project.application.transition.validator.IFormValidator;
 import it.sevenbits.project.application.transition.util.MessageResolver;
@@ -17,17 +18,15 @@ import java.util.Map;
  * @param <View> a view class for action in sequence
  * @param <Model> a model class for action in sequence
  */
-public abstract class AbstractExecutor<Form, View extends AbstractView, Model extends AbstractEntity> {
+public abstract class AbstractExecutor<Form extends AbstractForm, View extends AbstractView, Model extends AbstractEntity> {
 
     /** Message Resolver */
     @Autowired
     private MessageResolver messageResolver;
-    /** Validator */
+    /** Validator - if null then executor will be skip validation step */
     private IFormValidator validator;
     /** Presenter */
     private IPresenter presenter;
-    /** Exception message for issue, when validator not setup */
-    private static final String VALIDATOR_IS_NOT_DEFINED_EXCEPTION = "Validator is not defined";
 
     /**
      * Runs validator
@@ -36,8 +35,8 @@ public abstract class AbstractExecutor<Form, View extends AbstractView, Model ex
      * @throws ServiceException
      */
     private Map<String, String> validator(final Form form) throws ServiceException {
-        if (validator == null) {
-            throw new ServiceException(VALIDATOR_IS_NOT_DEFINED_EXCEPTION);
+        if (validator == null || form == null) {
+            return null;
         }
 
         return validator.validate(form);
