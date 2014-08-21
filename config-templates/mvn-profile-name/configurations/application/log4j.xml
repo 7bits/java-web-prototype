@@ -49,25 +49,25 @@
     </appender>
 
     <!-- Config Layer -->
-    <logger name="it.sevenbits.project.application.configs">
+    <logger name="it.sevenbits.project.application.config">
         <level value="DEBUG"/>
         <appender-ref ref="config"/>
     </logger>
 
     <!-- Repository Layer -->
-    <logger name="it.sevenbits.project.application.repositories">
+    <logger name="it.sevenbits.project.application.repository">
         <level value="DEBUG"/>
         <appender-ref ref="repository"/>
     </logger>
 
     <!-- Service Layer -->
-    <logger name="it.sevenbits.project.application.services">
+    <logger name="it.sevenbits.project.application.service">
         <level value="DEBUG"/>
         <appender-ref ref="service"/>
     </logger>
 
     <!-- Transition Layer -->
-    <logger name="it.sevenbits.project.application.transitions">
+    <logger name="it.sevenbits.project.application.transition">
         <level value="DEBUG"/>
         <appender-ref ref="transition"/>
     </logger>
