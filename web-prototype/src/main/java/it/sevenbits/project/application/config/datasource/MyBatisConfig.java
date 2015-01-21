@@ -38,8 +38,6 @@ public class MyBatisConfig {
      * Timeout in seconds before an abandoned connection can be removed.
      * Defaults to 300 seconds.
      */
-    //TODO should be transferred to property file
-    static final int REMOVE_ABANDONED_TIMEOUT = 10;
 
     @Inject
     private Environment environment;
@@ -63,7 +61,7 @@ public class MyBatisConfig {
         ds.setPoolPreparedStatements(true);
         ds.setDefaultAutoCommit(true);
         ds.setTestOnBorrow(true);
-        ds.setRemoveAbandonedTimeout(REMOVE_ABANDONED_TIMEOUT);
+        ds.setRemoveAbandonedTimeout(Integer.valueOf(environment.getProperty("jdbc.remove-abandoned-timeout")));
         ds.setRemoveAbandoned(true);
 
         return ds;
@@ -84,7 +82,7 @@ public class MyBatisConfig {
         /* Set default value for NULL type  */
         /* Used for Oracle DB               */
         /************************************/
-        Resource resource = new ClassPathResource("mybatis-config.xml");
+        Resource resource = new ClassPathResource("mvn-profile-name/mybatis-config.xml");
         sqlSessionFactory.setConfigLocation(resource);
 
         return sqlSessionFactory.getObject();
