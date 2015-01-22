@@ -146,20 +146,8 @@ MyBatis is JDBC-like ORM which offers a way of interacting with database in your
 DDD
 ---
 This project was built using Domain Driven Design. So we used some unusual techniques in the process of
- developing it. And all of them are not visible when application is complete. From developing process you got an
- answer why these techniques are better for business. First of all our mission was to implement number of use
- cases provided by customer:
-
-1. At first templates were made with hardcoded use case examples in it.
-2. Than Controllers were made with hardcoded model data providing data for all templates.
-3. Templates were modified to get data from controllers. Templates are ready now.
-4. Service methods were build with separate methods for each use case
- moving all data from controllers. Controllers are ready now.
-5. All hardcoded data from service methods were moved to repository, creating separate Repository for each Model.
-Service Layer is ready now.
-6. After that we modify Repository: adding ORM and implementing all interactions with it.
-
-Concluding it: we have separate methods for each of our use cases in any layer. We can easily implement any new
- use case by adding methods to all 3 business layers. Or we can easily remove one of them if our customer do not want it more.
+ developing it. And all of them are not visible when application is complete.
+We have separate methods for each of our use cases in any layer. We can easily implement any new
+ use case by adding methods to all business layers. Or we can easily remove one of them if our customer do not want it more.
  With such flexibility application have pretty code and can be easily maintained. Moreover you can show working
  application to customer from the second day since job started!
