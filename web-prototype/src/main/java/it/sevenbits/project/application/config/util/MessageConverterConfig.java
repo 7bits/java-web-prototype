@@ -5,11 +5,10 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.HttpMessageConverter;
 import org.springframework.http.converter.StringHttpMessageConverter;
-import org.springframework.http.converter.json.MappingJacksonHttpMessageConverter;
+import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.http.converter.support.AllEncompassingFormHttpMessageConverter;
 import org.springframework.http.converter.xml.SourceHttpMessageConverter;
 
-import javax.xml.transform.Source;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,9 +31,9 @@ public class MessageConverterConfig {
         List<HttpMessageConverter<?>> messageConverters = new ArrayList<HttpMessageConverter<?>>();
         messageConverters.add(new ByteArrayHttpMessageConverter());
         messageConverters.add(stringHttpMessageConverter);
-        messageConverters.add(new SourceHttpMessageConverter<Source>());
+        messageConverters.add(new SourceHttpMessageConverter<>());
         messageConverters.add(new AllEncompassingFormHttpMessageConverter());
-        messageConverters.add(new MappingJacksonHttpMessageConverter());
+        messageConverters.add(new MappingJackson2HttpMessageConverter());
 
         return messageConverters;
     }
